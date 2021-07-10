@@ -1,0 +1,19 @@
+.wrapper{
+  margin: auto;
+  width: 50%;
+}
+@keyframes animatedBackground {
+    from {
+      background-position: 0 100%;
+    }
+    to {
+      background-position:0 0 ;
+    }
+  }
+  .road {
+      height: 500px;
+      width: 100%;
+    background-image: url(https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/17b8ffc08b8a20b.png);
+    animation: animatedBackground 1s linear  infinite ;
+    background-repeat: no-repeat;
+  }
