@@ -6,10 +6,10 @@ class Car {
       this.image = image;
     }
     moveToTheRight() {
-        this.x += '1';
+        this.x+=5;
     }
     moveToTheLeft() {
-        this.x -= '1';
+        this.x-=5;
     }
 }
   export {Car}
