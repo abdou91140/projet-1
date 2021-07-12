@@ -1,4 +1,5 @@
-class Car {
+
+export class Car {
     constructor(x, y, speed, image) {
       this.x = x;
       this.y = y;
@@ -11,5 +12,7 @@ class Car {
     moveToTheLeft() {
         this.x-=5;
     }
+  accelarate() {
+    this.speed += 2
+  }
 }
-  export {Car}
