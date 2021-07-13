@@ -17,12 +17,14 @@ export class Game {
         // console.log(this.car.speed);
         break;
       case "ArrowLeft":
-        this.car.moveToTheLeft();
-        // console.log("left");
+        if (this.car.x > 0) {
+           this.car.moveToTheLeft();
+        }
         break;
       case "ArrowRight":
-        this.car.moveToTheRight();
-        // console.log("right");
+        if (this.car.x < 460) {
+          this.car.moveToTheRight();
+        }
         break;
     }
   }

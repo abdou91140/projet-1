@@ -12,7 +12,8 @@
   } */
   .road {
       height: 500px;
-      width: 100%;
+      width: 110%;
+      top:0px;
     animation:  1s  infinite ease-in-out;
     background-repeat: no-repeat;
   }

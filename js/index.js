@@ -31,20 +31,20 @@ class Display {
     roadDom.style.backgroundPosition = road.x +"%"+ ""+ road.y+"%"
   }
   start() {
-    this.carDisplay();
     this.roadDisplay()
+    this.carDisplay();
     this.obstacleDisplay()
   }
   update(event) {
-    if (car.x > 1 && car.x < 530) {
-      game.direction(event)
-      player.style.left = car.x + 'px'
+
+    // let roadSize=roadDom.getBoundingClientRect()
+    game.direction(event)
+           player.style.left = car.x + 'px'
       for (let i = 1; i < game.obstacles.length; i++) {
         let obstacle = document.getElementById('police-' + i)
         obstacle.style.top = game.obstacles[i].y
       }
       roadDom.style.backgroundPosition = road.x + "%" + "" + road.y + "%"
-    }
   }
 }
 
@@ -57,7 +57,6 @@ const display = new Display();
 const roadDom = document.querySelector(".road");
 display.start();
 const player = document.querySelector('#player-1')
-// console.log(player);
 document.addEventListener('keydown',function (event) {
   display.update(event)
 })
