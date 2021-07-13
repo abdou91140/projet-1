@@ -1,23 +1,28 @@
-.wrapper{
+body {
+  box-sizing: border-box;
+}
+.btn .btn-danger {
+  display: flex;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: auto;
   width: 50%;
 }
-/* @keyframes animatedBackground {
-    from {
-      background-position: 0 100%;
-    }
-    to {
-      background-position:0 0 ;
-    }
-  } */
-  .road {
-      height: 500px;
-      width: 110%;
-      top:0px;
-    animation:  1s  infinite ease-in-out;
-    background-repeat: no-repeat;
+@keyframes animatedBackground {
+  from {
+    background-position: 0 100%;
   }
-  .road >*{
-    animation-timing-function:ease-in-out;
-
+  to {
+    background-position: 0 0;
   }
+}
+.road {
+  height: 800px;
+  width: 110%;
+  top: 0px;
+  animation: animatedBackground 300ms linear forwards infinite;
+  background-repeat: no-repeat;
+}
