@@ -56,6 +56,7 @@ class Display {
         this.testerCollision(ob, player);
       } else {
         this.resetElementFromTheDom();
+        this.intervalMethod();
       }
     });
   }
@@ -93,7 +94,7 @@ class Display {
   }
   crashSound() {
     const audio = document.querySelector("#crash");
-    audio.style.src = "./soundFx/crash.mp3";
+    audio.src = "/soundFx/crash.mp3";
     audio.play();
   }
 }
@@ -120,11 +121,12 @@ document.addEventListener("keydown", function (event) {
 
 setInterval(() => {
   display.update();
-}, 400);
+}, 100);
 setInterval(() => {
   display.timerDisplay();
 }, 1000);
-// window.onload = function () {
-//   const audio = document.querySelector("#bo");
-//   audio.play();
-// };
+window.onload = function () {
+  const audio = document.querySelector("#bo");
+  audio.src = "/soundFx/crash.mp3";
+  audio.play();
+};
