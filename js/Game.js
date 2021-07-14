@@ -29,7 +29,7 @@ export class Game {
   }
   createObstacle() {
     this.startTimer();
-    let x = this.getRandomInt(331, 640);
+    let x = this.getRandomInt(0, 350);
     this.obstacle = new Obstacle(x, -200, "assets/police.png");
   }
   getRandomInt(min, max) {

@@ -6,9 +6,9 @@ class Display {
   obstacleDisplay() {
     let imgObstacle = document.createElement("img");
     imgObstacle.src = game.obstacle.image;
-    imgObstacle.style.left = game.obstacle.x;
+    imgObstacle.style.left = game.obstacle.x + "px";
     imgObstacle.style.top = game.obstacle.y + "px";
-    imgObstacle.style.position = "fixed";
+    imgObstacle.style.position = "absolute";
     imgObstacle.setAttribute("class", "police");
     roadDom.append(imgObstacle);
   }
@@ -16,8 +16,8 @@ class Display {
     let imgCar = document.createElement("img");
     imgCar.src = car.image;
     imgCar.style.left = car.x + "px";
-    imgCar.style.top = car.y + "px";
-    imgCar.style.position = "relative";
+    imgCar.style.bottom = car.y + "px";
+    imgCar.style.position = "absolute";
     imgCar.setAttribute("id", "player-1");
     roadDom.appendChild(imgCar);
   }
@@ -26,39 +26,79 @@ class Display {
     roadDom.style.position = "relative";
     roadDom.style.backgroundPosition = road.x + "%" + "" + road.y + "%";
   }
+  timerDisplay() {
+    timer.innerHTML = game.timer + "s";
+  }
+  scoreDisplay() {
+    let wrapper = document.querySelector(".wrapper");
+    wrapper.removeChild(roadDom);
+
+    let loose = "./assets/loose.jpeg";
+    wrapper.style.backgroundImage = loose;
+  }
   start() {
     game.createObstacle();
     this.roadDisplay();
     this.carDisplay();
     this.obstacleDisplay();
+    game.startTimer();
   }
   update() {
     player.style.left = car.x + "px";
     let listObstacles = [...obstacles];
     listObstacles.forEach((ob) => {
-      // console.log(
-      //   roadDom.getBoundingClientRect().right,
-      //   ob.getBoundingClientRect().x
-      // );
-
       if (
-        ob.getBoundingClientRect().y < roadDom.getBoundingClientRect().bottom &&
-        ob.getBoundingClientRect().x < roadDom.getBoundingClientRect().right
+        ob.getBoundingClientRect().y < roadDom.getBoundingClientRect().bottom
       ) {
         game.movementOfTheObstacle();
         ob.style.left = game.obstacle.x + "px";
         ob.style.top = game.obstacle.y + "px";
+        this.testerCollision(ob, player);
       } else {
-        let removePolice = document.querySelector(".road");
-        if (listObstacles.length > 1) {
-          removePolice.remove(listObstacles[listObstacles.length - 1]);
-        }
+        this.resetElementFromTheDom();
       }
     });
   }
+
+  resetElementFromTheDom() {
+    let obj = document.querySelector(".road");
+    let last = obj.lastChild;
+    obj.removeChild(last);
+  }
+
+  testerCollision(obstacle, player) {
+    if (
+      obstacle.getBoundingClientRect().x <
+        player.getBoundingClientRect().x +
+          player.getBoundingClientRect().width &&
+      player.getBoundingClientRect().x <
+        obstacle.getBoundingClientRect().x +
+          obstacle.getBoundingClientRect().width &&
+      player.getBoundingClientRect().y <
+        obstacle.getBoundingClientRect().y +
+          obstacle.getBoundingClientRect().height &&
+      obstacle.getBoundingClientRect().y <
+        player.getBoundingClientRect().y + player.getBoundingClientRect().height
+    ) {
+      this.crashSound();
+      this.scoreDisplay();
+    } else {
+    }
+  }
+  intervalMethod() {
+    setInterval(() => {
+      game.createObstacle();
+      display.obstacleDisplay();
+    }, 10000);
+  }
+  crashSound() {
+    const audio = document.querySelector("#crash");
+    audio.style.src = "./soundFx/crash.mp3";
+    audio.play();
+  }
 }
 
-const car = new Car(230, 300, 0, "assets/player-car.png");
+const car = new Car(230, 200, 0, "assets/player-car.png");
 const road = new Road(
   0,
   0,
@@ -68,23 +108,23 @@ const road = new Road(
 const game = new Game(car, road);
 const display = new Display();
 const roadDom = document.querySelector(".road");
+const btnStart = document.getElementById("start");
 display.start();
 const player = document.querySelector("#player-1");
 const obstacles = document.getElementsByClassName("police");
+const timer = document.getElementById("timer");
 
 document.addEventListener("keydown", function (event) {
   game.direction(event);
 });
 
 setInterval(() => {
-  game.createObstacle();
-  display.obstacleDisplay();
-}, 10000);
-
-setInterval(() => {
   display.update();
 }, 400);
-
-window.onload = function () {
-  document.body.style.filter = "blur";
-};
+setInterval(() => {
+  display.timerDisplay();
+}, 1000);
+// window.onload = function () {
+//   const audio = document.querySelector("#bo");
+//   audio.play();
+// };

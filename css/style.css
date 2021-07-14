@@ -1,5 +1,8 @@
 body {
+  text-align: center;
   box-sizing: border-box;
+  background-image: url("../assets/field.jpg");
+  background-size: contain;
 }
 .btn .btn-danger {
   display: flex;
@@ -20,6 +23,7 @@ body {
   }
 }
 .road {
+  position: relative;
   height: 800px;
   width: 110%;
   top: 0px;
