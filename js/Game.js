@@ -19,6 +19,16 @@ export class Game {
           this.car.moveToTheRight();
         }
         break;
+      case "ArrowUp":
+        if (this.car.y < 600) {
+          this.car.goUp();
+        }
+        break;
+      case "ArrowDown":
+        if (this.car.y > 0) {
+          this.car.goDown();
+        }
+        break;
     }
   }
   movementOfTheCar() {
@@ -38,11 +48,8 @@ export class Game {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   startTimer() {
-    setInterval(() => {
+    const intervalId = setInterval(() => {
       this.timer++;
     }, 1000);
   }
-  // collision(){
-  //   if(this.car.x)
-  // }
 }

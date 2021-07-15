@@ -29,13 +29,7 @@ class Display {
   timerDisplay() {
     timer.innerHTML = game.timer + "s";
   }
-  scoreDisplay() {
-    let wrapper = document.querySelector(".wrapper");
-    wrapper.removeChild(roadDom);
 
-    let loose = "./assets/loose.jpeg";
-    wrapper.style.backgroundImage = loose;
-  }
   start() {
     game.createObstacle();
     this.roadDisplay();
@@ -45,6 +39,8 @@ class Display {
   }
   update() {
     player.style.left = car.x + "px";
+    player.style.bottom = car.y + "px";
+
     let listObstacles = [...obstacles];
     listObstacles.forEach((ob) => {
       if (
@@ -81,8 +77,10 @@ class Display {
       obstacle.getBoundingClientRect().y <
         player.getBoundingClientRect().y + player.getBoundingClientRect().height
     ) {
-      this.crashSound();
-      this.scoreDisplay();
+      audioCar.muted = true;
+      let lastTimerStorage = localStorage;
+      lastTimerStorage.setItem("timer", game.timer);
+      window.location.href = "/pages/finish.html";
     } else {
     }
   }
@@ -91,11 +89,6 @@ class Display {
       game.createObstacle();
       display.obstacleDisplay();
     }, 10000);
-  }
-  crashSound() {
-    const audio = document.querySelector("#crash");
-    audio.src = "/soundFx/crash.mp3";
-    audio.play();
   }
 }
 
@@ -109,7 +102,6 @@ const road = new Road(
 const game = new Game(car, road);
 const display = new Display();
 const roadDom = document.querySelector(".road");
-const btnStart = document.getElementById("start");
 display.start();
 const player = document.querySelector("#player-1");
 const obstacles = document.getElementsByClassName("police");
@@ -121,12 +113,16 @@ document.addEventListener("keydown", function (event) {
 
 setInterval(() => {
   display.update();
+  for (let i = 0; i < game.timer; i++) {
+    // audioCar.play();
+  }
 }, 100);
 setInterval(() => {
   display.timerDisplay();
 }, 1000);
-window.onload = function () {
-  const audio = document.querySelector("#bo");
-  audio.src = "/soundFx/crash.mp3";
-  audio.play();
-};
+const audioCar = new Audio("soundFx/car-sound.mp3");
+
+const audioPolice = new Audio("soundFx/police.mp3");
+
+audioPolice.volume = 0.1;
+audioCar.volume = 0.01;

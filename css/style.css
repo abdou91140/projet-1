@@ -2,7 +2,7 @@ body {
   text-align: center;
   box-sizing: border-box;
   background-image: url("../assets/field.jpg");
-  background-size: contain;
+  background-size: cover;
 }
 .btn .btn-danger {
   display: flex;
@@ -13,6 +13,7 @@ body {
   align-items: center;
   margin: auto;
   width: 50%;
+  height: ;
 }
 @keyframes animatedBackground {
   from {
@@ -24,9 +25,19 @@ body {
 }
 .road {
   position: relative;
+  margin: auto;
   height: 800px;
   width: 110%;
   top: 0px;
   animation: animatedBackground 300ms linear forwards infinite;
   background-repeat: no-repeat;
+}
+.arrowKey {
+  position: relative;
+  height: 200px;
+  width: 300px;
+}
+#timer {
+  font-size: 100px;
+  margin-left: 15;
 }
