@@ -83,7 +83,7 @@ class Display {
       audioCar.muted = true;
       let lastTimerStorage = localStorage;
       lastTimerStorage.setItem("timer", game.timer);
-      window.location.href = "/pages/finish.html";
+      window.location.href = "pages/finish.html";
     } else {
     }
   }
