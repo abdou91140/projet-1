@@ -13,7 +13,6 @@ body {
   align-items: center;
   margin: auto;
   width: 50%;
-  height: ;
 }
 @keyframes animatedBackground {
   from {
@@ -26,11 +25,13 @@ body {
 .road {
   position: relative;
   margin: auto;
-  height: 800px;
-  width: 110%;
+  height: 100vh;
+  width: 100%;
   top: 0px;
-  animation: animatedBackground 300ms linear forwards infinite;
-  background-repeat: no-repeat;
+  animation: animatedBackground 300ms linear normal infinite;
+  background-image: url("https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/17b8ffc08b8a20b.png");
+  background-repeat: repeat-y;
+  background-size: cover;
 }
 .arrowKey {
   position: relative;
@@ -38,12 +39,12 @@ body {
   width: 300px;
 }
 #timer {
+  float: inline-end;
   font-size: 100px;
-  margin-left: 15;
+  margin: 15;
   padding: 10px;
   color: white;
   font: bold;
   fill-opacity: 15;
   background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 10%;
 }

@@ -1,6 +1,6 @@
 import { Game } from "./Game.js";
 import { Car } from "./Car.js";
-import { Road } from "./Road.js";
+// import { Road } from "./Road.js";
 
 class Display {
   obstacleDisplay() {
@@ -21,18 +21,13 @@ class Display {
     imgCar.setAttribute("id", "player-1");
     roadDom.appendChild(imgCar);
   }
-  roadDisplay() {
-    roadDom.style.backgroundImage = road.image;
-    roadDom.style.position = "relative";
-    roadDom.style.backgroundPosition = road.x + "%" + "" + road.y + "%";
-  }
+
   timerDisplay() {
     timer.innerHTML = game.timer + "s";
   }
 
   start() {
     game.createObstacle();
-    this.roadDisplay();
     this.carDisplay();
     this.obstacleDisplay();
     game.startTimer();
@@ -95,14 +90,8 @@ class Display {
   }
 }
 
-const car = new Car(230, 200, 0, "assets/player-car.png");
-const road = new Road(
-  0,
-  0,
-  "url(https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/17b8ffc08b8a20b.png)",
-  car
-);
-const game = new Game(car, road);
+const car = new Car(240, 200, 0, "assets/player-car.png");
+const game = new Game(car);
 const display = new Display();
 const roadDom = document.querySelector(".road");
 display.start();
@@ -124,8 +113,6 @@ setInterval(() => {
   display.timerDisplay();
 }, 1000);
 const audioCar = new Audio("soundFx/car-sound.mp3");
-
 const audioPolice = new Audio("soundFx/police.mp3");
-
-audioPolice.volume = 0.1;
-audioCar.volume = 0.01;
+audioPolice.volume = 0.05;
+audioCar.volume = 0.02;

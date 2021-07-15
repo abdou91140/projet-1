@@ -1,8 +1,7 @@
 import { Obstacle } from "./Obstacle.js";
 export class Game {
-  constructor(car, road) {
+  constructor(car) {
     this.car = car;
-    this.road = road;
     this.timer = 0;
     this.obstacle;
   }
@@ -15,12 +14,12 @@ export class Game {
         }
         break;
       case "ArrowRight":
-        if (this.car.x < 460) {
+        if (this.car.x < 640) {
           this.car.moveToTheRight();
         }
         break;
       case "ArrowUp":
-        if (this.car.y < 600) {
+        if (this.car.y < 780) {
           this.car.goUp();
         }
         break;
@@ -31,9 +30,7 @@ export class Game {
         break;
     }
   }
-  movementOfTheCar() {
-    this.road.y += this.car.speed;
-  }
+
   movementOfTheObstacle() {
     this.obstacle.y += this.timer;
   }
