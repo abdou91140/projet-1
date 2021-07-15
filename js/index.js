@@ -43,6 +43,9 @@ class Display {
 
     let listObstacles = [...obstacles];
     listObstacles.forEach((ob) => {
+      if (ob.getBoundingClientRect().y > 0) {
+        audioPolice.play();
+      }
       if (
         ob.getBoundingClientRect().y < roadDom.getBoundingClientRect().bottom
       ) {
@@ -114,7 +117,7 @@ document.addEventListener("keydown", function (event) {
 setInterval(() => {
   display.update();
   for (let i = 0; i < game.timer; i++) {
-    // audioCar.play();
+    audioCar.play();
   }
 }, 100);
 setInterval(() => {

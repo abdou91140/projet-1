@@ -40,4 +40,10 @@ body {
 #timer {
   font-size: 100px;
   margin-left: 15;
+  padding: 10px;
+  color: white;
+  font: bold;
+  fill-opacity: 15;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10%;
 }
