@@ -39,7 +39,15 @@ body {
   width: 300px;
 }
 #timer {
-  float: inline-end;
+  font-size: 40px;
+  margin: 15;
+  padding: 10px;
+  color: white;
+  font: bold;
+  fill-opacity: 15;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+#final-time{
   font-size: 100px;
   margin: 15;
   padding: 10px;

@@ -107,6 +107,8 @@ setInterval(() => {
   display.update();
   for (let i = 0; i < game.timer; i++) {
     audioCar.play();
+    audioSong.play()
+
   }
 }, 100);
 setInterval(() => {
@@ -114,5 +116,7 @@ setInterval(() => {
 }, 1000);
 const audioCar = new Audio("soundFx/car-sound.mp3");
 const audioPolice = new Audio("soundFx/police.mp3");
+const audioSong = new Audio("./soundFx/song.mp3")
+audioSong.volume = 0.1
 audioPolice.volume = 0.05;
 audioCar.volume = 0.02;
