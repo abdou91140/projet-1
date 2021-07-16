@@ -15,7 +15,7 @@ scoreDisplay();
 const audioCrash = new Audio("../soundFx/crash.mp3");
 const audioBo = new Audio("../soundFx/audioBo.mp3");
 
-audioBo.volume = 0.7;
+audioBo.volume = 0.1;
 audioCrash.volume = 0.1;
 audioCrash.play();
 audioBo.play();

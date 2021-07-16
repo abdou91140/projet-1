@@ -22,27 +22,22 @@ class Display {
     roadDom.appendChild(imgCar);
   }
 
-  timerDisplay() {
-    timer.innerHTML = game.timer + "s";
-  }
-
   start() {
     game.createObstacle();
     this.carDisplay();
     this.obstacleDisplay();
-    game.startTimer();
   }
   update() {
+    timer.innerHTML = game.timer + "s";
     player.style.left = car.x + "px";
     player.style.bottom = car.y + "px";
-
     let listObstacles = [...obstacles];
     listObstacles.forEach((ob) => {
       if (ob.getBoundingClientRect().y > 0) {
         audioPolice.play();
       }
       if (
-        ob.getBoundingClientRect().y < roadDom.getBoundingClientRect().bottom
+        ob.getBoundingClientRect().y < roadDom.getBoundingClientRect().bottom - 210
       ) {
         game.movementOfTheObstacle();
         ob.style.left = game.obstacle.x + "px";
@@ -75,7 +70,6 @@ class Display {
       obstacle.getBoundingClientRect().y <
         player.getBoundingClientRect().y + player.getBoundingClientRect().height
     ) {
-      audioCar.muted = true;
       let lastTimerStorage = localStorage;
       lastTimerStorage.setItem("timer", game.timer);
       window.location.href = "pages/finish.html";
@@ -83,18 +77,23 @@ class Display {
     }
   }
   intervalMethod() {
-    setInterval(() => {
       game.createObstacle();
       display.obstacleDisplay();
-    }, 10000);
+
   }
 }
-
+// get the update size of my road for not to have the car out of this road
+const road = document.getElementsByClassName("road"); 
+var roadResize =window.onresize=function () {
+  return road[0].getBoundingClientRect();
+}
+ 
 const car = new Car(240, 200, 0, "assets/player-car.png");
-const game = new Game(car);
+const game = new Game(car,roadResize());
 const display = new Display();
 const roadDom = document.querySelector(".road");
 display.start();
+game.startTimer();
 const player = document.querySelector("#player-1");
 const obstacles = document.getElementsByClassName("police");
 const timer = document.getElementById("timer");
@@ -108,12 +107,10 @@ setInterval(() => {
   for (let i = 0; i < game.timer; i++) {
     audioCar.play();
     audioSong.play()
-
   }
 }, 100);
-setInterval(() => {
-  display.timerDisplay();
-}, 1000);
+
+
 const audioCar = new Audio("soundFx/car-sound.mp3");
 const audioPolice = new Audio("soundFx/police.mp3");
 const audioSong = new Audio("./soundFx/song.mp3")

@@ -39,6 +39,7 @@ body {
   width: 300px;
 }
 #timer {
+ z-index: 100 !important; 
   font-size: 40px;
   margin: 15;
   padding: 10px;
@@ -55,4 +56,7 @@ body {
   font: bold;
   fill-opacity: 15;
   background-color: rgba(0, 0, 0, 0.4);
+}
+.police{
+  z-index: 1!important;
 }

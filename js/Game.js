@@ -1,12 +1,14 @@
 import { Obstacle } from "./Obstacle.js";
 export class Game {
-  constructor(car) {
+  constructor(car,roadSize) {
     this.car = car;
     this.timer = 0;
     this.obstacle;
+    this.roadSize=roadSize;
   }
 
   direction(event) {
+    console.log(this.roadSize);
     switch (event.code) {
       case "ArrowLeft":
         if (this.car.x > 0) {
@@ -14,12 +16,12 @@ export class Game {
         }
         break;
       case "ArrowRight":
-        if (this.car.x < 640) {
+        if (this.car.x < this.roadSize.width-102) {
           this.car.moveToTheRight();
         }
         break;
       case "ArrowUp":
-        if (this.car.y < 780) {
+        if (this.car.y < this.roadSize.height - 150) {
           this.car.goUp();
         }
         break;
@@ -32,10 +34,9 @@ export class Game {
   }
 
   movementOfTheObstacle() {
-    this.obstacle.y += this.timer;
+    this.obstacle.y += 20;
   }
   createObstacle() {
-    this.startTimer();
     let x = this.getRandomInt(0, 350);
     this.obstacle = new Obstacle(x, -200, "assets/police.png");
   }
@@ -45,7 +46,7 @@ export class Game {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   startTimer() {
-    const intervalId = setInterval(() => {
+  setInterval(() => {
       this.timer++;
     }, 1000);
   }
